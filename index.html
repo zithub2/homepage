@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TITLE</title>
+    <style>
+#incsize{
+  background-color: rgba(0,255,255,0.5);
+  width: 5ex;
+  height: 5ex;
+  position: fixed;
+  right: 5ex;
+  bottom: 15ex;
+}
+#decsize{
+  background-color: rgba(0,255,255,0.5);
+  width: 5ex;
+  height: 5ex;
+  position: fixed;
+  right: 5ex;
+  bottom: 5ex;
+}
+      .classname{
+        background-color: aqua;
+      }
+      .urltitle{
+        margin-left: 2ex;
+      }
+    </style>
+  </head>
+  <script>
+    fontSize=30;
+p=function(x){console.log(x);};
+gid=function(x){return document.getElementById(x);};
+ce=function(tagname){return document.createElement(tagname);};
+ceic=function(tagname,ih,cn){
+  el=ce(tagname);
+  el.innerHTML=ih;
+  el.className=cn;
+  return el;
+};
+  </script>
+  <script>
+    classified=
+  [  [ "新闻",
+    ["人民日报","paper.people.com.cn"],
+  ], ["诗书",
+    ["古诗文网","https://www.gushiwen.org"],
+    ["劝学网","http://www.quanxue.cn"],
+  ], [ "视频",
+    ["B站","https://www.bilibili.com"],
+    ["草民电影网","https://www.cmdy5.com"],
+  ], [ "音频",
+    ["freemidi","https://www.freemidi.org"],
+    ["经典老歌网","http://www.jdlg.net"],
+  ], ["股票",
+    ["新股日历","http://vip.stock.finance.sina.com.cn/corp/go.php/vRPD_NewStockIssue/page/1.phtml"],
+    ["雪球行情","https://xueqiu.com/hq"],
+    ["新浪行情","http://vip.stock.finance.sina.com.cn/mkt/"],
+    ["腾讯行情","http://stockapp.finance.qq.com/mstats/"],
+  ]];
+  </script>
+  <body>
+    <div id="classified"></div>
+  <script>
+    div=gid("classified");
+    for(ic in classified){
+      name=classified[ic][0];
+      div.appendChild(ceic("span",name,"classname"));
+      urls=classified[ic].slice(1);
+      for(iu in urls){
+        title=urls[iu][0];
+        url=urls[iu][1];
+        el=ceic('a',title,'urltitle');
+        el.href=url;
+        div.appendChild(el);
+      }
+      div.appendChild(ce('hr'));
+    }
+  </script>
+    <div id='incsize' onclick='document.body.style.fontSize=(++fontSize)+"px";'></div>
+    <div id='decsize' onclick='document.body.style.fontSize=(--fontSize)+"px";'></div>
+  </body>
+</html>
