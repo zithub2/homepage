@@ -26,6 +26,16 @@
       .urltitle{
         margin-left: 2ex;
       }
+      .searchinput{
+        border-radius: 4ex;
+        height: 4ex;
+        margin-left: 10%;
+        width: 80%;
+      }
+      .searchengine{
+        margin-right: 1ex;
+        margin-top: 1ex;
+      }
     </style>
   </head>
   <script>
@@ -59,26 +69,51 @@ ceic=function(tagname,ih,cn){
     ["新浪行情","http://vip.stock.finance.sina.com.cn/mkt/"],
     ["腾讯行情","http://stockapp.finance.qq.com/mstats/"],
   ]];
+search=[
+  ["百度","https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&fenlei=256&wd="],
+  ["Bing词典","https://cn.bing.com/dict/search?q="],
+  ["今朝维基","https://zh.jinzhao.wiki/w/index.php?title=Special%3A%E6%90%9C%E7%B4%A2&go=%E5%89%8D%E5%BE%80&ns0=1&search="],
+  ["今朝wiki","https://en.jinzhao.wiki/w/index.php?cirrusUserTesting=glent_m0&title=Special%3ASearch&go=Go&ns0=1&search="],
+  ["知乎","https://www.zhihu.com/search?type=content&q="],
+];
   </script>
   <body>
-    <div id="classified"></div>
+    <div id="classified">
+      <form id='search'>
+        <input type='text' name='search' class='searchinput'><br />
+        <span style="margin-left:10%"></span>
+      </form>
+      <hr />
+    </div>
   <script>
-    div=gid("classified");
-    for(ic in classified){
-      name=classified[ic][0];
-      div.appendChild(ceic("span",name,"classname"));
-      urls=classified[ic].slice(1);
-      for(iu in urls){
-        title=urls[iu][0];
-        url=urls[iu][1];
-        el=ceic('a',title,'urltitle');
-        el.href=url;
-        div.appendChild(el);
-      }
-      div.appendChild(ce('hr'));
-    }
+    c=gid("classified");
+for(ic in classified){
+  name=classified[ic][0];
+  c.appendChild(ceic("span",name,"classname"));
+  urls=classified[ic].slice(1);
+  for(iu in urls){
+    title=urls[iu][0];
+    url=urls[iu][1];
+    el=ceic('a',title,'urltitle');
+    el.href=url;
+    c.appendChild(el);
+  }
+  c.appendChild(ce('hr'));
+}
+s=gid('search');
+for(i in search){
+  name=search[i][0];
+  url=search[i][1];
+  el=ceic('button',name,'searchengine');
+  el.url=url;
+  el.onclick=function(){
+    window.open(this.url+s.firstElementChild.value);
+  }
+  s.appendChild(el);
+}
   </script>
     <div id='incsize' onclick='document.body.style.fontSize=(++fontSize)+"px";'></div>
     <div id='decsize' onclick='document.body.style.fontSize=(--fontSize)+"px";'></div>
   </body>
 </html>
+
